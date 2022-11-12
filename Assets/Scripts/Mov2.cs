@@ -5,20 +5,20 @@ using UnityEngine;
 public class Mov2 : MonoBehaviour
 {
 
-    private GameObject Objeto;
+    private GameObject selectedObject;
 
 
     private void update() {
         
            if (Input.GetMouseButtonDown(0)) {
-               if(Objeto == null){
+               if(selectedObject == null){
                RaycastHit hit=CastRay();
 
                if(hit.collider != null){
-                  if(!hit.collider.CompareTag("drag")){
+                  if(!hit.collider.CompareTag("ObjetoMover")){
                       return;
                   }
-                  Objeto= hit.collider.GameObject; 
+                  selectedObject = hit.collider.gameObject; 
                   Cursor.visible = false;
                }
 
@@ -28,10 +28,10 @@ public class Mov2 : MonoBehaviour
               }
            }
     
-           if(Objeto != null){
-              Vector3 position = new Vector3(Input.mousePosition.x,Input.mousePosition.y,Camera.main.WorldToScreenPoint(Objeto.transform.position).z);
+           if(selectedObject != null){
+              Vector3 position = new Vector3(Input.mousePosition.x,Input.mousePosition.y,Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
               Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-              Objeto.transform.position = new Vector3(worldPosition.x,.25f, worldPosition.z);
+              selectedObject.transform.position = new Vector3(worldPosition.x,.25f, worldPosition.z);
 
 
            }
