@@ -5,56 +5,50 @@ using UnityEngine;
 public class Mov2 : MonoBehaviour
 {
 
-    private GameObject selectedObject;
+     Vector3 offset;
+     public string destinationTag ="DropArea";
+
+    void OnMouseDown()
+    {
+        offset = transform.position - MouseWorldPosition();
+        transform.GetComponent<Collider>().enabled =false;
+    }
+
+    void OnMouseDrag()
+    {
+        transform.position=MouseWorldPosition() + offset;
+    }
+
+    void OnMouseUp()
+    { 
+     var rayOrigin = Camera.main.transform.position;
+     var rayDirection = MouseWorldPosition() -Camera.main.transform.position;
+     RaycastHit hitInfo;
+     if(Physics.Raycast(rayOrigin,rayDirection,out hitInfo))
+     {
+        if(hitInfo.transform.tag == destinationTag)
+        {
+
+            transform.position =hitInfo.transform.position;
+        }
 
 
-    private void update() {
-        
-           if (Input.GetMouseButtonDown(0)) {
-               if(selectedObject == null){
-               RaycastHit hit=CastRay();
+     }
+     transform.GetComponent<Collider>().enabled= true;
 
-               if(hit.collider != null){
-                  if(!hit.collider.CompareTag("ObjetoMover")){
-                      return;
-                  }
-                  selectedObject = hit.collider.gameObject; 
-                  Cursor.visible = false;
-               }
 
-               
-              } else {
 
-              }
-           }
+    }
+
+
+    Vector3 MouseWorldPosition()
+    { 
+     var mouseScreenPos = Input.mousePosition;
+     mouseScreenPos.z = Camera.main.WorldToScreenPoint(transform.position).z;
+     return Camera.main.ScreenToWorldPoint(mouseScreenPos);
+    }
+
+
+
     
-           if(selectedObject != null){
-              Vector3 position = new Vector3(Input.mousePosition.x,Input.mousePosition.y,Camera.main.WorldToScreenPoint(selectedObject.transform.position).z);
-              Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-              selectedObject.transform.position = new Vector3(worldPosition.x,.25f, worldPosition.z);
-
-
-           }
-
-
-    }
-
-    private RaycastHit CastRay(){
-        Vector3 screenMousePosFar = new Vector3(
-          Input.mousePosition.x,
-          Input.mousePosition.y,
-          Camera.main.farClipPlane);
-          
-         Vector3 screenMousePosNear = new Vector3(
-          Input.mousePosition.x,
-          Input.mousePosition.y,
-          Camera.main.nearClipPlane);
-         
-         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
-         RaycastHit hit;
-         Physics.Raycast(worldMousePosNear,worldMousePosFar = worldMousePosNear, out hit);
-
-         return hit;
-    }
 }
