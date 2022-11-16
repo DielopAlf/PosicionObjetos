@@ -37,16 +37,16 @@ public class Mov5Definitivo : MonoBehaviour
     }
     private void MousePressed(InputAction.CallbackContext context)
     { 
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        if (Physics.Raycast(ray,out hit))
+        Ray rayo = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hitInfo;
+        if (Physics.Raycast(rayo, out hitInfo))
         { 
             
             {
-                if (hit.collider != null && (hit.collider.gameObject.CompareTag("Movible") || hit.collider.
+                if (hitInfo.collider != null && (hitInfo.collider.gameObject.CompareTag("Movible") ||  hitInfo.collider.
                     gameObject.layer ==LayerMask.NameToLayer("Movible"))) 
                 {
-                    StartCoroutine(DragUpdate(hit.collider.gameObject));
+                    StartCoroutine(DragUpdate(hitInfo.collider.gameObject));
                 }
                 
             }

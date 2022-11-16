@@ -9,8 +9,8 @@ public class Mov4 : MonoBehaviour
     Camera cam;
     Vector3 screenPos;
     Vector3 offset;
-    RaycastHit hit;
-    Ray ray;
+    RaycastHit hitinfo;
+    Ray rayo;
 
     private void Start()
     {
@@ -24,10 +24,10 @@ public class Mov4 : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
 
-         ray= cam.ScreenPointToRay(Input.mousePosition);
-         if(Physics.Raycast(ray.origin, ray.direction, out hit))
+            rayo= cam.ScreenPointToRay(Input.mousePosition);
+         if(Physics.Raycast(rayo.origin, rayo.direction, out hitinfo))
          {
-          focus =hit.collider.transform;
+          focus =hitinfo.collider.transform;
           print("click=" +focus.name);
 
 
@@ -43,10 +43,11 @@ public class Mov4 : MonoBehaviour
         }
         else if(isDrag ==true)
         {
+        //var
         Vector3 currentScreenPos = new Vector3(Input.mousePosition.x,Input.mousePosition.y,screenPos.z);
         Vector3 currentPos = cam.ScreenToWorldPoint(currentScreenPos) + offset;
         
-        focus.position= currentPos;
+        focus.position= currentPos; 
         }
     }
 }
