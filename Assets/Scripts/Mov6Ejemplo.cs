@@ -10,6 +10,7 @@ public class Mov6Ejemplo : MonoBehaviour
 
 
     public GameObject cube;
+    Vector3 originalScale;
 
     void Update()
     {
@@ -49,7 +50,9 @@ public class Mov6Ejemplo : MonoBehaviour
     }
     void ReleaseCube()
     {
+        LeanTween.cancel(cube);
 
+        LeanTween.scale(cube, originalScale, 0.75f).setEaseInBack();
         Debug.Log("Release");
         cube = null;
     }
@@ -61,11 +64,22 @@ public class Mov6Ejemplo : MonoBehaviour
         {
             pos = Input.GetTouch(0).position;
         }
+
         Ray rayo = Camera.main.ScreenPointToRay(pos);
         RaycastHit hitInfo;
-        if(Physics.Raycast(rayo))
+        if(Physics.Raycast(rayo, out hitInfo)== true)
         {
+            if (hitInfo.collider.tag.Equals("cube"))
+            {
+                cube = hitInfo.collider.gameObject;
+                originalScale = cube.transform.localScale;
+                LeanTween.scale(cube, cube.transform.localScale * 1.2f, 0.75f).setEaseInBounce().setLoopPingPong();
+                    
+                    
+            }
+               
 
+                
 
         }
     }
