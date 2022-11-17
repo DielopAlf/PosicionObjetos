@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -262,7 +262,6 @@ GameObject:
   - component: {fileID: 211565286}
   - component: {fileID: 211565285}
   - component: {fileID: 211565284}
-  - component: {fileID: 211565287}
   - component: {fileID: 211565283}
   m_Layer: 0
   m_Name: Cubo Naranja
@@ -349,20 +348,6 @@ Transform:
   m_Father: {fileID: 233171964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &211565287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211565282}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e0c1a595cfcea44bb4c7db2549f06b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  estadoActual: 0
-  cube: {fileID: 211565282}
 --- !u!1 &230366168
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +766,55 @@ Transform:
   - {fileID: 1107024134}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &394656881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394656883}
+  - component: {fileID: 394656882}
+  m_Layer: 0
+  m_Name: controllador
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &394656882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394656881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2711d68c7ffa24d973907f855fa1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 787217716}
+  rotar: {fileID: 1216573304}
+  escalar: {fileID: 949958557}
+  estadoActual: 0
+  objetoseleccionado: {fileID: 0}
+--- !u!4 &394656883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394656881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -122.30768, y: -20.242023, z: -4.6074476}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434394369
 GameObject:
@@ -1311,7 +1345,7 @@ GameObject:
   - component: {fileID: 787217717}
   - component: {fileID: 787217716}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button Mover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1381,7 +1415,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 787217717}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 394656882}
+        m_TargetAssemblyTypeName: NuevoScript, Assembly-CSharp
+        m_MethodName: seleccionarmover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &787217717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,7 +1478,6 @@ GameObject:
   - component: {fileID: 902276554}
   - component: {fileID: 902276553}
   - component: {fileID: 902276552}
-  - component: {fileID: 902276556}
   m_Layer: 0
   m_Name: Bola de prueba Mov2
   m_TagString: Movible
@@ -1518,18 +1563,6 @@ Transform:
   m_Father: {fileID: 2022033646}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &902276556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902276551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eafeb64df4396eb47a7725119a3612eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &949958555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1576,7 @@ GameObject:
   - component: {fileID: 949958558}
   - component: {fileID: 949958557}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button Escalar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1613,7 +1646,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 949958558}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 394656882}
+        m_TargetAssemblyTypeName: NuevoScript, Assembly-CSharp
+        m_MethodName: seleccionarEscalar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &949958558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1960,7 +2005,7 @@ GameObject:
   - component: {fileID: 1216573305}
   - component: {fileID: 1216573304}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button Rotar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2030,7 +2075,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1216573305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 394656882}
+        m_TargetAssemblyTypeName: NuevoScript, Assembly-CSharp
+        m_MethodName: seleccionarRotar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1216573305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,7 +2138,6 @@ GameObject:
   - component: {fileID: 1328363387}
   - component: {fileID: 1328363386}
   - component: {fileID: 1328363385}
-  - component: {fileID: 1328363389}
   m_Layer: 0
   m_Name: Cubo Rojo
   m_TagString: Movible
@@ -2167,20 +2223,6 @@ Transform:
   m_Father: {fileID: 233171964}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328363389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328363384}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e0c1a595cfcea44bb4c7db2549f06b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  estadoActual: 0
-  cube: {fileID: 0}
 --- !u!1 &1453591809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,7 +2985,6 @@ GameObject:
   - component: {fileID: 2084826555}
   - component: {fileID: 2084826554}
   - component: {fileID: 2084826553}
-  - component: {fileID: 2084826557}
   - component: {fileID: 2084826552}
   - component: {fileID: 2084826556}
   m_Layer: 0
@@ -3047,20 +3088,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &2084826557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084826550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2711d68c7ffa24d973907f855fa1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  estadoActual: 0
-  objetoseleccionado: {fileID: 2084826550}
 --- !u!1 &2107596420
 GameObject:
   m_ObjectHideFlags: 0

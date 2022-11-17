@@ -1,11 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+
+
+
+
+/* En el update comprobamos el estado y si esta en seleccionar objeto para mover rotar o escalar ejecutamos la funcion selecion objetos.
+ * En selección objetos comprobamos si hacemos click y si le damos con un raycast a un objeto que tenga el tag de movible. 
+ * En caso de que si guardamos ese objeto en la variable objetos seleccionados y cambiamos el estado a mover, escalar o rotar en base que estuvieramos en el estado de selec objeto mover escala o rotar.
+ * En el update si estamos en alguno d elos 3 estados ejecutamos la funcion de cada uno.
+ *
+ *
+ * */
 public class NuevoScript : MonoBehaviour
 {
 
-    //
+    public Button mover;
+    public Button rotar;
+    public Button escalar;
 
 
     public enum EstadosSelector
@@ -13,6 +28,7 @@ public class NuevoScript : MonoBehaviour
         EnEspera,
         SeleccionObjetoMover,
         SeleccionObjetoRotar,
+        SeleccionObjetoEscalar,
         ObjetoSeleccionado,
         Mover,
         Escalar,
@@ -31,18 +47,33 @@ public class NuevoScript : MonoBehaviour
         {
 
 
-            case EstadosSelector.EnEspera:
-                estadoActual = EstadosSelector.SeleccionObjetoMover;
-                break;
+           // case EstadosSelector.EnEspera:
+                //   estadoActual = EstadosSelector.SeleccionObjetoMover;
+                //   estadoActual = EstadosSelector.SeleccionObjetoMover;
+                //   break;
             case EstadosSelector.SeleccionObjetoMover:
                 SeleccionObjeto();
                 break;
             case EstadosSelector.Mover:
                 MoverObjeto();
                 break;
-            case EstadosSelector.Soltar:
-                SoltarObjeto();
+            case EstadosSelector.SeleccionObjetoRotar:
+                SeleccionObjeto();
+               break;
+
+            case EstadosSelector.Rotar:
+                rotarObjeto();
                 break;
+            case EstadosSelector.SeleccionObjetoEscalar:
+                SeleccionObjeto();
+                break;
+            case EstadosSelector.Escalar:
+                escalarObjeto();
+                break;
+
+                // case EstadosSelector.Soltar:
+                // SoltarObjeto();
+                //   break;
 
         }
 
@@ -64,9 +95,26 @@ public class NuevoScript : MonoBehaviour
                     objetoseleccionado = objectHit;
 
                     if (estadoActual == EstadosSelector.SeleccionObjetoMover)
+                    {
+
                         estadoActual = EstadosSelector.Mover;
 
-                }
+                    }
+                     else if (estadoActual == EstadosSelector.SeleccionObjetoRotar)
+                    {
+
+                        estadoActual= EstadosSelector.Rotar;
+                        
+                    }
+                    else if (estadoActual == EstadosSelector.SeleccionObjetoEscalar)
+                    {
+
+
+                        estadoActual= EstadosSelector.Escalar;
+                        //Debug.Log("prueba");
+
+                    }
+                }   
 
 
             }
@@ -74,6 +122,7 @@ public class NuevoScript : MonoBehaviour
         }
 
     }
+    //movemos el objeto al punto donde este el raton.
     void MoverObjeto()
 
     {
@@ -88,6 +137,12 @@ public class NuevoScript : MonoBehaviour
 
 
         objetoseleccionado.SetActive(true);
+        if (Input.GetMouseButtonUp(0))
+        {
+            estadoActual = EstadosSelector.EnEspera;
+            objetoseleccionado = null;
+
+        }
 
 
 
@@ -95,19 +150,87 @@ public class NuevoScript : MonoBehaviour
 
 
     }
+    void rotarObjeto()
 
-    void SoltarObjeto()
     {
-        objetoseleccionado = null;
+        //si movemos la rueda del raton rotamos el objeto hacia distintos lados
+        if (Input.GetAxis("Mouse ScrollWheel")>0) 
+        {
+
+            objetoseleccionado.transform.Rotate(Vector3.down*10f,Space.Self);
+
+        }else if(Input.GetAxis("Mouse ScrollWheel")<0)
+        {
+
+            objetoseleccionado.transform.Rotate(Vector3.up*10f, Space.Self);
+
+        }
+
+
+
+
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            estadoActual = EstadosSelector.EnEspera;
+            objetoseleccionado = null;
+
+        }
+
+
 
 
     }
-    
+    //si movemos la rueda del raton escalamos el objeto 
+
+    void escalarObjeto()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel")>0)
+        {
+
+            objetoseleccionado.transform.localScale = objetoseleccionado.transform.localScale+new Vector3(1f, 1f, 1f);
+
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel")<0)
+        {
+
+            objetoseleccionado.transform.localScale = objetoseleccionado.transform.localScale-new Vector3(1f, 1f, 1f);
+
+        }
+
+
+
+
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            estadoActual = EstadosSelector.EnEspera;
+            objetoseleccionado = null;
+
+        }
+
+
+
+
+    }
+
+    public void seleccionarmover()
+       
+    {
+        estadoActual = EstadosSelector.SeleccionObjetoMover;
+    }
+
+    public void seleccionarRotar()
+    {
         
+        estadoActual = EstadosSelector.SeleccionObjetoRotar;
+    }
 
+    public void seleccionarEscalar()
+    {
+        estadoActual=EstadosSelector.SeleccionObjetoEscalar;
 
-
-
+    }
 
 }
 
