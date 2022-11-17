@@ -6,6 +6,22 @@ public class Mov6Ejemplo : MonoBehaviour
 
 {
 
+    public enum EstadosSelector
+    { 
+      EnEspera,
+      SeleccionObjeto,
+      ObjetoSeleccionado,
+      Mover,
+      Escalar,
+      Rotar,
+    //LOs estados que se necesiten//
+    }
+    [SerializeField]
+    EstadosSelector estadoActual = EstadosSelector.EnEspera;
+
+
+
+
 
 
 
@@ -67,7 +83,7 @@ public class Mov6Ejemplo : MonoBehaviour
 
         Ray rayo = Camera.main.ScreenPointToRay(pos);
         RaycastHit hitInfo;
-        if(Physics.Raycast(rayo, out hitInfo)== true)
+        if(Physics.Raycast(rayo, out hitInfo) == true)
         {
             if (hitInfo.collider.tag.Equals("cube"))
             {
