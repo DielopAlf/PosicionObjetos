@@ -241,6 +241,7 @@ public class NuevoScript : MonoBehaviour
     public void CrearObjeto(GameObject elementoACrear)
     {
         GameObject nuevoObjeto = Instantiate(elementoACrear, Vector3.zero, Quaternion.identity);
+        objetoseleccionado = nuevoObjeto;
         objetoseleccionado.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
         //Color prueba = new Color();
         //prueba.b Random.Range(0f,125f);
