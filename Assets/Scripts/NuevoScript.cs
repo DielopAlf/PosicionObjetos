@@ -21,19 +21,25 @@ public class NuevoScript : MonoBehaviour
     public Button mover;
     public Button rotar;
     public Button escalar;
-
-
+    public Button crear;
+    public GameObject prefabcubo;
+    public GameObject prefabCilindro;
+    public GameObject prefabesfera;
     public enum EstadosSelector
     {
         EnEspera,
         SeleccionObjetoMover,
         SeleccionObjetoRotar,
         SeleccionObjetoEscalar,
+        EsperaTrasCreacion,
+        
         ObjetoSeleccionado,
         Mover,
         Escalar,
         Soltar,
         Rotar,
+        Crear,
+
         //LOs estados que se necesiten//
     }
     [SerializeField]
@@ -46,11 +52,12 @@ public class NuevoScript : MonoBehaviour
         switch (estadoActual)
         {
 
-
-           // case EstadosSelector.EnEspera:
-                //   estadoActual = EstadosSelector.SeleccionObjetoMover;
-                //   estadoActual = EstadosSelector.SeleccionObjetoMover;
-                //   break;
+          
+             
+            // case EstadosSelector.EnEspera:
+            //   estadoActual = EstadosSelector.SeleccionObjetoMover;
+            //   estadoActual = EstadosSelector.SeleccionObjetoMover;
+            //   break;
             case EstadosSelector.SeleccionObjetoMover:
                 SeleccionObjeto();
                 break;
@@ -70,10 +77,9 @@ public class NuevoScript : MonoBehaviour
             case EstadosSelector.Escalar:
                 escalarObjeto();
                 break;
-
-                // case EstadosSelector.Soltar:
-                // SoltarObjeto();
-                //   break;
+            case EstadosSelector.EsperaTrasCreacion:
+                estadoActual = EstadosSelector.Mover;
+                break;
 
         }
 
@@ -92,6 +98,12 @@ public class NuevoScript : MonoBehaviour
                 GameObject objectHit = hit.transform.gameObject;
                 if (objectHit.CompareTag("Movible"))
                 {
+                    
+                    
+                    //objetoseleccionadocambiarestado (añadir is 
+
+
+
                     objetoseleccionado = objectHit;
 
                     if (estadoActual == EstadosSelector.SeleccionObjetoMover)
@@ -114,6 +126,15 @@ public class NuevoScript : MonoBehaviour
                         //Debug.Log("prueba");
 
                     }
+                    else if (estadoActual == EstadosSelector.EsperaTrasCreacion)
+                    {
+
+
+                        estadoActual = EstadosSelector.Crear;
+                        //Debug.Log("prueba");
+
+                    }
+                    
                 }   
 
 
@@ -153,8 +174,12 @@ public class NuevoScript : MonoBehaviour
     void rotarObjeto()
 
     {
-        //si movemos la rueda del raton rotamos el objeto hacia distintos lados
+        
+
         if (Input.GetAxis("Mouse ScrollWheel")>0) 
+
+            
+
         {
 
             objetoseleccionado.transform.Rotate(Vector3.down*10f,Space.Self);
@@ -213,6 +238,27 @@ public class NuevoScript : MonoBehaviour
 
 
     }
+    public void CrearObjeto(GameObject elementoACrear)
+    {
+        GameObject nuevoObjeto = Instantiate(elementoACrear, Vector3.zero, Quaternion.identity);
+        objetoseleccionado = nuevoObjeto;
+        objetoseleccionado.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+        //Color prueba = new Color();
+        //prueba.b Random.Range(0f,125f);
+        //prueba.g Random.Range(0f,125f);
+        //prueba.c Random.Range(0f,125f);
+        //prueba.c Random.Range(0f,125f);
+        //prueba.a = 1f;
+        //objetoseleccionado.GetComponent<MeshRenderer>().material.color = prueba;
+
+        estadoActual = EstadosSelector.EsperaTrasCreacion;
+        
+    }
+
+
+
+
+   
 
     public void seleccionarmover()
        
@@ -231,7 +277,13 @@ public class NuevoScript : MonoBehaviour
         estadoActual=EstadosSelector.SeleccionObjetoEscalar;
 
     }
+    public void Seleccionarcrear()
+    {
 
+      //  estadoActual = EstadosSelector.SeleccionObjetoCrear;
+
+    }
+   
 }
 
 
