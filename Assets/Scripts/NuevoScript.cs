@@ -31,7 +31,7 @@ public class NuevoScript : MonoBehaviour
         SeleccionObjetoMover,
         SeleccionObjetoRotar,
         SeleccionObjetoEscalar,
-        EsperaTrasCreacio,
+        EsperaTrasCreacion,
         
         ObjetoSeleccionado,
         Mover,
@@ -77,7 +77,7 @@ public class NuevoScript : MonoBehaviour
             case EstadosSelector.Escalar:
                 escalarObjeto();
                 break;
-            case EstadosSelector.EsperaTrasCreacio:
+            case EstadosSelector.EsperaTrasCreacion:
                 estadoActual = EstadosSelector.Mover;
                 break;
 
@@ -126,7 +126,7 @@ public class NuevoScript : MonoBehaviour
                         //Debug.Log("prueba");
 
                     }
-                    else if (estadoActual == EstadosSelector.EsperaTrasCreacio)
+                    else if (estadoActual == EstadosSelector.EsperaTrasCreacion)
                     {
 
 
@@ -242,7 +242,7 @@ public class NuevoScript : MonoBehaviour
     {
         GameObject nuevoObjeto = Instantiate(elementoACrear, Vector3.zero, Quaternion.identity);
         objetoseleccionado = nuevoObjeto;
-        estadoActual = EstadosSelector.EsperaTrasCreacio;
+        estadoActual = EstadosSelector.EsperaTrasCreacion;
         
     }
 
